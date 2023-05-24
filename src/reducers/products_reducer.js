@@ -42,6 +42,7 @@ const products_reducer = (state, action) => {
             ...state,
             single_product_loading: true,
             single_product_error: false,
+            single_product: {},
         };
     }
 
@@ -50,6 +51,7 @@ const products_reducer = (state, action) => {
             ...state,
             single_product_loading: false,
             single_product_error: true,
+            single_product: {},
         };
     }
 

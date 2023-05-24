@@ -11,11 +11,19 @@ import {
 
 const filter_reducer = (state, action) => {
     if (action.type === LOAD_PRODUCTS) {
+        let maxPrice = action.payload.map((p) => p.price);
+        maxPrice = Math.max(...maxPrice);
+
         return {
             ...state,
             filtered_products: [...action.payload],
             all_products: [...action.payload],
             isLoading: false,
+            filters: {
+                ...state.filters,
+                max_price: maxPrice,
+                price: maxPrice,
+            },
             //we spread the array because an array takes
             //one address in our memory, so if i do not
             //spread it, filtering functionality will be lost.
@@ -67,7 +75,7 @@ const filter_reducer = (state, action) => {
                 if (a.price < b.price) {
                     return 1;
                 }
-                
+
                 return 0;
             });
         }
@@ -90,6 +98,22 @@ const filter_reducer = (state, action) => {
             isLoading: false,
         };
     }
+
+    if (action.type === UPDATE_FILTERS) {
+        const { name, value } = action.payload;
+
+        return {
+            ...state,
+            filters: { ...state.filters, [name]: value },
+        };
+    }
+
+    if (action.type === FILTER_PRODUCTS) {
+
+      return {
+          ...state,
+      };
+  }
 
     throw new Error(`No Matching "${action.type}" - action type`);
 };
