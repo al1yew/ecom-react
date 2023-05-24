@@ -7,7 +7,30 @@ import Loading from './Loading'
 import Product from './Product'
 
 const FeaturedProducts = () => {
-  return <h4>featured products</h4>
+
+  const { products_loading: loading, featured_products: featured, products_error: error } = useProductsContext()
+
+  if (error) {
+    return <Error />
+  }
+
+  if (loading) {
+    return <Loading />
+  }
+
+  return <Wrapper className='section'>
+    <div className="title">
+      <h2>Featured products</h2>
+      <div className="underline"></div>
+    </div>
+    <div className="section-center featured">
+      {
+        featured.slice(0, 3).map(p => {
+          return <Product {...p} key={p.id} />
+        })
+      }
+    </div>
+  </Wrapper>
 }
 
 const Wrapper = styled.section`
