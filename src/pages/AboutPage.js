@@ -15,7 +15,7 @@ const AboutPage = () => {
 
         </div>
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Dolorum, quos, in fugiat itaque distinctio neque, aut qui magni doloribus veniam odit cupiditate. Necessitatibus nulla voluptate, molestias veniam quia illo. Id.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae officia placeat fuga adipisci, aliquam eaque enim iste perferendis dolores quia voluptates alias! Earum est doloribus reprehenderit? Et aliquid soluta totam explicabo sed accusamus quod obcaecati.
         </p>
       </article>
     </Wrapper>
