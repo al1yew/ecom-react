@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useProductsContext } from '../context/products_context'
-import { single_product_url as url } from '../utils/constants'
 import { formatPrice } from '../utils/helpers'
 import {
   Loading,
@@ -15,7 +14,50 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 const SingleProductPage = () => {
-  return <h4>single product page</h4>
+  const { id } = useParams()
+  const {
+    single_product_error: error,
+    single_product_loading: loading,
+    single_product: product,
+    axiosSingleProduct: get
+  } = useProductsContext()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    get(id)
+  }, [id])
+
+  useEffect(() => {
+    if (error) {
+      setTimeout(() => {
+        navigate('/products')
+      }, 3000);
+    }
+  }, [error])
+
+  if (loading) {
+    return <Loading />
+  }
+
+  if (error) {
+    return <Error />
+  }
+
+  const { name, price, description, stock, stars, reviews, id: sku, company, images } = product
+
+  return (
+    <Wrapper>
+      <PageHero title={name} product />
+      <div className="section section-center page">
+        <Link to='/products' className='btn'>
+          back to products
+        </Link>
+        <div className="product-center">
+          
+        </div>
+      </div>
+    </Wrapper>
+  )
 }
 
 const Wrapper = styled.main`
