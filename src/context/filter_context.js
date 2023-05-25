@@ -113,6 +113,7 @@ export const FilterProvider = ({ children }) => {
                 setGridView,
                 setListView,
                 updateFilters,
+                clearFilters,
             }}
         >
             {children}

@@ -7,11 +7,12 @@ const ProductImages = ({ images }) => {
     return (
         main && (
             <Wrapper>
-                <img src={main.url} alt="main image" className="main" />
+                <img src={main.url} alt="mainimage" className="main" />
                 <div className="gallery">
                     {images.map((img, i) => {
                         return (
                             <img
+                                alt="imageeee"
                                 src={img.url}
                                 key={img.id}
                                 onClick={() => setMain(images[i])}

@@ -15,16 +15,19 @@ import { Link } from "react-router-dom";
 
 const SingleProductPage = () => {
     const { id } = useParams();
+
     const {
         single_product_error: error,
         single_product_loading: loading,
         single_product: product,
         axiosSingleProduct: get,
     } = useProductsContext();
+
     const navigate = useNavigate();
 
     useEffect(() => {
         get(id);
+        // eslint-disable-next-line
     }, [id]);
 
     useEffect(() => {
@@ -33,6 +36,7 @@ const SingleProductPage = () => {
                 navigate("/products");
             }, 3000);
         }
+        // eslint-disable-next-line
     }, [error]);
 
     if (loading) {

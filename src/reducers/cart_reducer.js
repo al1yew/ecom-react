@@ -72,9 +72,9 @@ const cart_reducer = (state, action) => {
                     }
                     return { ...item, amount: newAmount };
                 }
-            } else {
-                return item;
             }
+
+            return item;
         });
 
         return { ...state, cart: tempCart };
@@ -87,7 +87,7 @@ const cart_reducer = (state, action) => {
                 total.total_items += amount;
                 total.total_price += price * amount;
 
-                return total
+                return total;
             },
             {
                 total_items: 0,
