@@ -27,13 +27,20 @@ export const CartProvider = ({ children }) => {
         });
     };
 
-    const removeItem = () => {};
+    const removeItem = (id) => {
+        dispatch({ type: REMOVE_CART_ITEM, payload: id });
+    };
 
-    const toggleAmount = () => {};
+    const toggleAmount = (id, value) => {
+        dispatch({ type: TOGGLE_CART_ITEM_AMOUNT, payload: { id, value } });
+    };
 
-    const clearCart = () => {};
+    const clearCart = () => {
+        dispatch({ type: CLEAR_CART });
+    };
 
     useEffect(() => {
+        dispatch({ type: COUNT_CART_TOTALS }); //kajdiy raz schitayem total dla headera
         localStorage.setItem("cart", JSON.stringify(state.cart));
     }, [state.cart]);
 
