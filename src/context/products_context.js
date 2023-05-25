@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useReducer } from "react";
 import reducer from "../reducers/products_reducer";
-import { single_product_url } from "../utils/constants";
+import { single_product_url, products_url } from "../utils/constants";
 import {
     SIDEBAR_OPEN,
     SIDEBAR_CLOSE,
@@ -13,6 +13,7 @@ import {
     GET_SINGLE_PRODUCT_ERROR,
 } from "../actions";
 
+/*
 const prods = [
     {
         id: "recZkNf2kwmdBcqd0",
@@ -274,6 +275,7 @@ const prods = [
         shipping: true,
     },
 ];
+*/
 
 const initialState = {
     isSidebarOpen: false,
@@ -305,14 +307,14 @@ export const ProductsProvider = ({ children }) => {
 
     const axiosProducts = async () => {
         dispatch({ type: GET_PRODUCTS_BEGIN });
-        dispatch({ type: GET_PRODUCTS_SUCCESS, payload: prods }); //data is an array, i will not set it into object
+        // dispatch({ type: GET_PRODUCTS_SUCCESS, payload: prods }); //data is an array, i will not set it into object
 
-        // try {
-        //     const { data } = await axios.get(products_url);
-        //     dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data }); //data is an array, i will not set it into object
-        // } catch (error) {
-        //     dispatch({ type: GET_PRODUCTS_ERROR });
-        // }
+        try {
+            const { data } = await axios.get(products_url);
+            dispatch({ type: GET_PRODUCTS_SUCCESS, payload: data }); //data is an array, i will not set it into object
+        } catch (error) {
+            dispatch({ type: GET_PRODUCTS_ERROR });
+        }
     };
 
     useEffect(() => {
