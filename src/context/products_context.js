@@ -13,7 +13,7 @@ import {
     GET_SINGLE_PRODUCT_ERROR,
 } from "../actions";
 
-const prodsss = [
+const prods = [
     {
         id: "recZkNf2kwmdBcqd0",
         name: "accent chair",
@@ -290,7 +290,7 @@ const ProductsContext = React.createContext();
 
 export const ProductsProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
-    
+
     //#region sidebar
 
     const openSidebar = () => {
@@ -305,7 +305,7 @@ export const ProductsProvider = ({ children }) => {
 
     const axiosProducts = async () => {
         dispatch({ type: GET_PRODUCTS_BEGIN });
-        dispatch({ type: GET_PRODUCTS_SUCCESS, payload: prodsss }); //data is an array, i will not set it into object
+        dispatch({ type: GET_PRODUCTS_SUCCESS, payload: prods }); //data is an array, i will not set it into object
 
         // try {
         //     const { data } = await axios.get(products_url);

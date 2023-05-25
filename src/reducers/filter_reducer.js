@@ -66,6 +66,8 @@ const filter_reducer = (state, action) => {
             tempProds = tempProds.sort((a, b) => a.price - b.price);
         }
 
+        //oba varianta pokazivayu kak delat Array.sort
+
         if (sort === "price-highest") {
             tempProds = tempProds.sort((a, b) => {
                 if (a.price > b.price) {
@@ -109,11 +111,59 @@ const filter_reducer = (state, action) => {
     }
 
     if (action.type === FILTER_PRODUCTS) {
+        const { all_products } = state;
 
-      return {
-          ...state,
-      };
-  }
+        let tempProducts = [...all_products];
+
+        const { text, category, company, color, price, shipping } =
+            state.filters;
+
+        if (text) {
+            tempProducts = tempProducts.filter((x) =>
+                x.name.toLowerCase().includes(text)
+            );
+        }
+
+        if (category !== "all") {
+            tempProducts = tempProducts.filter((x) => x.category === category);
+        }
+
+        if (company !== "all") {
+            tempProducts = tempProducts.filter((x) => x.company === company);
+        }
+
+        if (color !== "all") {
+            tempProducts = tempProducts.filter((x) => {
+                return x.colors.find((c) => c === color);
+            });
+        }
+
+        tempProducts = tempProducts.filter((x) => x.price <= price);
+
+        if (shipping) {
+            tempProducts = tempProducts.filter((x) => x.shipping);
+        }
+
+        return {
+            ...state,
+            filtered_products: tempProducts,
+        };
+    }
+
+    if (action.type === CLEAR_FILTERS) {
+        return {
+            ...state,
+            filters: {
+                ...state.filters,
+                text: "",
+                company: "all",
+                category: "all",
+                color: "all",
+                price: state.filters.max_price,
+                shipping: false,
+            },
+        };
+    }
 
     throw new Error(`No Matching "${action.type}" - action type`);
 };
